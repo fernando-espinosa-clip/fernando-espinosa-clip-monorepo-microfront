@@ -8,7 +8,6 @@
   "dependencies": {
     "@clipmx/clip-components": "0.16.2-alpha.8",
     "@clipmx/clip-icons": "0.12.0-beta.5",
-    "@clipmx/clip-illustrations": "^0.2.1",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.8.4",
