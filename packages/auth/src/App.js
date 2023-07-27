@@ -15,6 +15,10 @@ const generateClassName = createGenerateClassName({
   productionPrefix: 'au',
 });
 
+const Default = () => {
+  return <div>Estas en Root</div>
+}
+
 export default ({ history, onSignIn }) => {
   return (
     <div>
@@ -23,6 +27,9 @@ export default ({ history, onSignIn }) => {
           <CssBaseline />
             <Router history={history}>
               <Switch>
+                <Route path="/">
+                  <Default />
+                </Route>
                 <Route path="/auth/signin">
                   <Signin onSignIn={onSignIn} />
                 </Route>
