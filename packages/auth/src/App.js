@@ -27,7 +27,7 @@ export default ({ history, onSignIn }) => {
           <CssBaseline />
             <Router history={history}>
               <Switch>
-                <Route path="/">
+                <Route path="/" exact>
                   <Default />
                 </Route>
                 <Route path="/auth/signin">
