@@ -17,7 +17,7 @@ const prodConfig = {
     new ModuleFederationPlugin({
       name: 'container',
       remotes: {
-        // marketing: `marketing@https://main.d1fpni6b6tpdg2.amplifyapp.com/remoteEntry.js`,
+        marketing: `marketing@https://main.d1q1nicd5914fm.amplifyapp.com/remoteEntry.js`,
         auth: 'auth@https://main.d1fpni6b6tpdg2.amplifyapp.com/remoteEntry.js',
         // dashboard: `dashboard@${domain}/dashboard/latest/remoteEntry.js`,
       },
