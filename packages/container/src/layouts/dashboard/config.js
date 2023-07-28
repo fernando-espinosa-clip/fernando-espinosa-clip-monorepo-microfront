@@ -75,7 +75,7 @@ export const items = [
   },
   {
     title: 'Error',
-    path: '/404',
+    path: '/auth/404',
     icon: (
       <SvgIcon fontSize="small">
         <XCircleIcon />
