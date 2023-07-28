@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Router } from 'react-router-dom';
+import { Switch, Route, Router, Redirect } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
 import Dashboard from './views/pages'
@@ -11,9 +11,6 @@ import { createTheme } from './themes'
 
 const theme = createTheme();
 
-const Default = () => {
-  return <div>Estas en Root</div>
-}
 
 export default ({ history }) => {
   return (
@@ -24,7 +21,7 @@ export default ({ history }) => {
             <Router history={history}>
               <Switch>
                 <Route path="/" exact>
-                  <Default />
+                  <Redirect to={'/cpanel/dashboard'} />
                 </Route>
                 <Route path="/cpanel/dashboard">
                   <Dashboard />
