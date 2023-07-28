@@ -3,13 +3,14 @@ import { createBrowserHistory } from 'history';
 import Progress from './components/Progress';
 import Header from './components/Header';
 import React, { useEffect, useState,Suspense, lazy } from 'react';
-import { Switch, Route, Router } from 'react-router-dom';
+import { Switch, Route, Router, Redirect } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
+import Layout from './layouts/dashboard/layout'
 
 const MarketingLazy = lazy(() => import('./components/MarketingApp'));
 const AuthLazy = lazy(() => import('./components/AuthApp'));
-// const DashboardLazy = lazy(() => import('./components/DashboardApp'));
+const CpanelLazy = lazy(() => import('./components/CpanelApp'));
 
 import theme from './themes'
 
@@ -19,38 +20,43 @@ const Default = () => {
 
 const history = createBrowserHistory();
 
+const theTheme = theme({})
 
 export default () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   useEffect(() => {
     if (isSignedIn) {
-      history.push('/dashboard');
+      history.push('/cpanel/dashboard');
     }
   }, [isSignedIn]);
+  console.log(theTheme)
   return (
         <StyledEngineProvider>
-          <ThemeProvider theme={theme({})}>
+          <ThemeProvider theme={theTheme}>
             <CssBaseline />
             <Router history={history}>
-              <div>
-                <Header
-                    onSignOut={() => setIsSignedIn(false)}
-                    isSignedIn={isSignedIn}
-                />
                 <Suspense fallback={<Progress />}>
                   <Switch>
                     <Route path="/auth">
                       <AuthLazy onSignIn={() => setIsSignedIn(true)} />
                     </Route>
-                    { /* && (<Route path="/dashboard">
-                      {!isSignedIn && <Redirect to="/" />}
-                      <DashboardLazy />
-                    </Route>) */
-                    }
-                    <Route path="/" component={MarketingLazy} />
+                    <Route path="/cpanel">
+                      {!isSignedIn && false && <Redirect to="/" />}
+                      <Layout>
+                        <CpanelLazy />
+                      </Layout>
+                    </Route>
+                    <Route path="/">
+                      <>
+                        <Header
+                            onSignOut={() => setIsSignedIn(false)}
+                            isSignedIn={isSignedIn}
+                        />
+                        <MarketingLazy/>
+                      </>
+                    </Route>
                   </Switch>
                 </Suspense>
-              </div>
             </Router>
 
           </ThemeProvider>

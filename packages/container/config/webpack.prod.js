@@ -19,6 +19,7 @@ const prodConfig = {
       remotes: {
         marketing: `marketing@https://main.d1q1nicd5914fm.amplifyapp.com/remoteEntry.js`,
         auth: 'auth@https://main.d1fpni6b6tpdg2.amplifyapp.com/remoteEntry.js',
+        cpanel: 'cpanel@https://dashboard.d1kd9pclj6eku6.amplifyapp.com/remoteEntry.js',
         // dashboard: `dashboard@${domain}/dashboard/latest/remoteEntry.js`,
       },
       shared: packageJson.dependencies,

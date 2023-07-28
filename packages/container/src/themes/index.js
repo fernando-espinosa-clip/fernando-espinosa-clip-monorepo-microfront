@@ -1,7 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 
 // assets
-import colors from '../utils/colorVariables';
+import colors, { neutral, indigo} from '../utils/colorVariables';
 
 // project imports
 import componentStyleOverrides from './compStyleOverride';
@@ -13,6 +13,8 @@ export const theme = (customization) => {
 
     const themeOption = {
         colors: color,
+        neutral,
+        indigo,
         heading: color.grey900,
         paper: color.paper,
         backgroundDefault: color.paper,
@@ -26,9 +28,11 @@ export const theme = (customization) => {
         customization
     };
 
+    const palette = {...themePalette(themeOption), neutral, indigo}
+
     const themeOptions = {
         direction: 'ltr',
-        palette: themePalette(themeOption),
+        palette,
         mixins: {
             toolbar: {
                 minHeight: '48px',
