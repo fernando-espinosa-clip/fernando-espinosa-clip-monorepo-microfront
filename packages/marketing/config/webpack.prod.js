@@ -1,13 +1,15 @@
 const { merge } = require('webpack-merge');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-const packageJson = require('../package.json');
 const commonConfig = require('./webpack.common');
+const packageJson = require('../package.json');
+const CopyPlugin = require('copy-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const prodConfig = {
   mode: 'production',
   output: {
     filename: '[name].[contenthash].js',
-    publicPath: '/marketing/latest/',
+    publicPath: 'auto',
   },
   plugins: [
     new ModuleFederationPlugin({
@@ -17,6 +19,17 @@ const prodConfig = {
         './MarketingApp': './src/bootstrap',
       },
       shared: packageJson.dependencies,
+    }),
+    new Dotenv({
+      systemvars: true,
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'public',
+          to: './',
+        },
+      ],
     }),
   ],
 };

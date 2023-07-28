@@ -1,41 +1,35 @@
 import React from 'react';
 import { Switch, Route, Router } from 'react-router-dom';
-import {
-  StylesProvider,
-  createGenerateClassName,
-  createMuiTheme,
-  ThemeProvider
-} from '@material-ui/core/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline, StyledEngineProvider } from '@mui/material';
 
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#FC4C02',
-    }
-  }
-});
-
+import theme from './themes'
 import Landing from './components/Landing';
 import Pricing from './components/Pricing';
 
-const generateClassName = createGenerateClassName({
-  productionPrefix: 'ma',
-});
+
+
+const Default = () => {
+  return <div>Estas en Root</div>
+}
 
 export default ({ history }) => {
   return (
-    <div>
-      <StylesProvider generateClassName={generateClassName}>
-        <ThemeProvider theme={theme}>
-          <Router history={history}>
-            <Switch>
-              <Route exact path="/pricing" component={Pricing} />
-              <Route path="/" component={Landing} />
-            </Switch>
-          </Router>
-        </ThemeProvider>
-      </StylesProvider>
-    </div>
+      <div>
+        <StyledEngineProvider>
+          <ThemeProvider theme={theme({})}>
+            <CssBaseline />
+            <Router history={history}>
+              <Switch>
+                <Switch>
+                  <Route exact path="/pricing" component={Pricing} />
+                  <Route path="/" component={Landing} />
+                </Switch>
+              </Switch>
+            </Router>
+
+          </ThemeProvider>
+        </StyledEngineProvider>
+      </div>
   );
 };
