@@ -10,7 +10,7 @@ export const AccountPopover = (props) => {
   const handleSignOut = useCallback(
     () => {
       onClose?.();
-        history.push('/auth/login');
+        history.push('/auth/signin');
     },
     [onClose, history]
   );
