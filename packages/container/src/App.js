@@ -7,7 +7,7 @@ import { Switch, Route, Router } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
 
-// const MarketingLazy = lazy(() => import('./components/MarketingApp'));
+const MarketingLazy = lazy(() => import('./components/MarketingApp'));
 const AuthLazy = lazy(() => import('./components/AuthApp'));
 // const DashboardLazy = lazy(() => import('./components/DashboardApp'));
 
@@ -19,9 +19,6 @@ const Default = () => {
 
 const history = createBrowserHistory();
 
-const MarketingLazy = () => {
-  return <div>Public Root</div>
-}
 
 export default () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
