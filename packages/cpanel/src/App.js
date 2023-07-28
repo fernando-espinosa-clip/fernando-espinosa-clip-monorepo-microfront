@@ -6,6 +6,8 @@ import Dashboard from './views/pages'
 import Settings from './views/pages/settings'
 import Account from './views/pages/account'
 import Customers from './views/pages/customers'
+import Companies from './views/pages/companies'
+import NotFound from './views/pages/404'
 
 import { createTheme } from './themes'
 
@@ -34,6 +36,12 @@ export default ({ history }) => {
                 </Route>
                 <Route path="/cpanel/customers">
                   <Customers />
+                </Route>
+                <Route path="/cpanel/companies">
+                  <Companies />
+                </Route>
+                <Route path="/cpanel/404">
+                  <NotFound />
                 </Route>
               </Switch>
             </Router>
