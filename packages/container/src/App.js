@@ -41,12 +41,12 @@ export default () => {
                       <AuthLazy onSignIn={() => setIsSignedIn(true)} />
                     </Route>
                     <Route path="/cpanel">
-                      {!isSignedIn && false && <Redirect to="/" />}
+                      {!isSignedIn && <Redirect to="/shop" />}
                       <Layout>
                         <CpanelLazy />
                       </Layout>
                     </Route>
-                    <Route path="/">
+                    <Route path="/shop">
                       <>
                         <Header
                             onSignOut={() => setIsSignedIn(false)}
@@ -54,6 +54,9 @@ export default () => {
                         />
                         <MarketingLazy/>
                       </>
+                    </Route>
+                    <Route path="/">
+                      <Redirect to="/shop" />
                     </Route>
                   </Switch>
                 </Suspense>

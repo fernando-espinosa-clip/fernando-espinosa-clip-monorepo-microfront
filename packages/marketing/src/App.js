@@ -22,8 +22,8 @@ export default ({ history }) => {
             <Router history={history}>
               <Switch>
                 <Switch>
-                  <Route exact path="/pricing" component={Pricing} />
-                  <Route path="/" component={Landing} />
+                  <Route exact path="/shop/pricing" component={Pricing} />
+                  <Route path="/shop" component={Landing} />
                 </Switch>
               </Switch>
             </Router>
