@@ -6,13 +6,23 @@ import UserIcon from '@heroicons/react/24/solid/UserIcon';
 import UserPlusIcon from '@heroicons/react/24/solid/UserPlusIcon';
 import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 import XCircleIcon from '@heroicons/react/24/solid/XCircleIcon';
+import ShoppingCartIcon from '@heroicons/react/24/solid/ShoppingCartIcon';
 import { SvgIcon } from '@mui/material';
 import React from 'react';
 
 export const items = [
   {
-    title: 'Overview',
+    title: 'Shop',
     path: '/',
+    icon: (
+        <SvgIcon fontSize="small">
+          <ShoppingCartIcon />
+        </SvgIcon>
+    )
+  },
+  {
+    title: 'Dashboard',
+    path: '/cpanel/dashboard',
     icon: (
       <SvgIcon fontSize="small">
         <ChartBarIcon />
@@ -75,7 +85,7 @@ export const items = [
   },
   {
     title: 'Error',
-    path: '/auth/404',
+    path: '/cpanel/404',
     icon: (
       <SvgIcon fontSize="small">
         <XCircleIcon />

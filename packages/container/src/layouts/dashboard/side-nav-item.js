@@ -1,4 +1,4 @@
-import Link from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Box, ButtonBase } from '@mui/material';
 import React from 'react';
@@ -15,8 +15,7 @@ export const SideNavItem = (props) => {
       }
       : {
         component: Link,
-        href: path,
-              to: path
+        to: path
       }
     : {};
 
