@@ -11,6 +11,10 @@ const mount = (el, { onSignIn, onNavigate, defaultHistory, initialPath }) => {
       initialEntries: [initialPath],
     });
 
+  if(!defaultHistory) {
+    console.log('lets use memory router')
+  }
+
   if (onNavigate) {
     history.listen(onNavigate);
   }

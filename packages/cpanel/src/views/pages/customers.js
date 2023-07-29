@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { subDays, subHours } from 'date-fns';
+import { useHistory} from "react-router-dom";
 import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon';
 import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon';
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
@@ -178,6 +179,7 @@ const Page = () => {
   const customers = useCustomers(page, rowsPerPage);
   const customersIds = useCustomerIds(customers);
   const customersSelection = useSelection(customersIds);
+  const history = useHistory();
 
   const handlePageChange = useCallback(
     (event, value) => {
@@ -242,6 +244,7 @@ const Page = () => {
               </Stack>
               <div>
                 <Button
+                    onClick={() => history.push('/cpanel/account')}
                   startIcon={(
                     <SvgIcon fontSize="small">
                       <PlusIcon />
