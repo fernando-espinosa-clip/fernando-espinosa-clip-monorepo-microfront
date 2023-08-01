@@ -11,15 +11,16 @@ const devConfig = {
   devServer: {
     port: 8080,
     historyApiFallback: {
-      index: 'index.html',
+      index: '/index.html',
     },
   },
   plugins: [
     new ModuleFederationPlugin({
       name: 'container',
       remotes: {
-        marketing: 'marketing@http://localhost:8081/remoteEntry.js',
-        auth: 'auth@http://localhost:8082/remoteEntry.js',
+        marketing: `marketing@https://main.d1q1nicd5914fm.amplifyapp.com/remoteEntry.js`,
+        auth: 'auth@https://main.d1fpni6b6tpdg2.amplifyapp.com/remoteEntry.js',
+        cpanel: 'cpanel@https://dashboard.d1kd9pclj6eku6.amplifyapp.com/remoteEntry.js',
         // dashboard: 'dashboard@http://localhost:8083/remoteEntry.js',
       },
       shared: packageJson.dependencies,

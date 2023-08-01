@@ -10,6 +10,7 @@ import { makeStyles } from '@mui/styles';
 import Container from '@mui/material/Container';
 import MaterialLink from '@mui/material/Link';
 import { Link } from 'react-router-dom';
+import { cards } from './data';
 
 function Copyright() {
   return (
@@ -54,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     flexGrow: 1,
+    padding: '8px !important',
   },
   footer: {
     backgroundColor: theme.palette.background.paper,
@@ -61,7 +63,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Album() {
   const classes = useStyles();
@@ -94,14 +95,14 @@ export default function Album() {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Link to="/pricing">
+                  <Link to="/shop/pricing">
                     <Button variant="contained" color="primary">
                       Pricing
                     </Button>
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link to="/pricing">
+                  <Link to="/shop/pricing">
                     <Button variant="outlined" color="primary">
                       Pricing
                     </Button>
@@ -119,20 +120,19 @@ export default function Album() {
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
+                    image={card.url}
+                    title={card.title}
                   />
                   <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                    <Typography gutterBottom variant="h4" component="h2">
+                      {card.title}
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe
-                      the content!
+                      {card.description}
                     </Typography>
                   </CardContent>
-                  <CardActions>
-                    <Button size="small" color="primary">
+                  <CardActions sx={{ p: 1}}>
+                    <Button size="small" color="error" variant="contained">
                       View
                     </Button>
                     <Button size="small" color="primary">

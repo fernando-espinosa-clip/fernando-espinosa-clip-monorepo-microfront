@@ -150,7 +150,7 @@ export default function Pricing() {
           component="h1"
           variant="h2"
           align="center"
-          color="textPrimary"
+          color=""
           gutterBottom
         >
           Pricing
@@ -181,6 +181,7 @@ export default function Pricing() {
               <Card>
                 <CardHeader
                   title={tier.title}
+                  sx={{ color: 'white', '& .MuiCardHeader-title' : { color: 'white', fontSize: '20px', fontWeight: '600'}}}
                   subheader={tier.subheader}
                   titleTypographyProps={{ align: 'center' }}
                   subheaderTypographyProps={{ align: 'center' }}
