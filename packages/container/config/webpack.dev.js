@@ -1,7 +1,7 @@
 const { merge } = require('webpack-merge');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const commonConfig = require('./webpack.common');
-const packageJson = require('../package.json');
+const sharedFunctions = require("./shared.functions");
 
 const devConfig = {
   mode: 'development',
@@ -23,7 +23,7 @@ const devConfig = {
         cpanel: 'cpanel@https://dashboard.d1kd9pclj6eku6.amplifyapp.com/remoteEntry.js',
         // dashboard: 'dashboard@http://localhost:8083/remoteEntry.js',
       },
-      shared: packageJson.dependencies,
+      shared: sharedFunctions.sharedModules(),
     }),
   ],
 };

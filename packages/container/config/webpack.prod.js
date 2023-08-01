@@ -1,7 +1,7 @@
 const { merge } = require('webpack-merge');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const commonConfig = require('./webpack.common');
-const packageJson = require('../package.json');
+const sharedFunctions = require('./shared.functions');
 const Dotenv = require('dotenv-webpack');
 
 // const domain = process.env.PRODUCTION_DOMAIN;
@@ -21,7 +21,7 @@ const prodConfig = {
         cpanel: 'cpanel@https://dashboard.d1kd9pclj6eku6.amplifyapp.com/remoteEntry.js',
         // dashboard: `dashboard@${domain}/dashboard/latest/remoteEntry.js`,
       },
-      shared: packageJson.dependencies,
+      shared: sharedFunctions.sharedModules(),
     }),
     new Dotenv({
       systemvars: true,

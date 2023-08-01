@@ -1,10 +1,10 @@
 const { merge } = require('webpack-merge');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-const packageJson = require('../package.json');
 const commonConfig = require('./webpack.common');
 const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const sharedFunctions = require("./shared.functions");
 
 const prodConfig = {
   mode: 'production',
@@ -19,7 +19,7 @@ const prodConfig = {
       exposes: {
         './CpanelApp': './src/bootstrap',
       },
-      shared: packageJson.dependencies,
+      shared: sharedFunctions.sharedModules(),
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
