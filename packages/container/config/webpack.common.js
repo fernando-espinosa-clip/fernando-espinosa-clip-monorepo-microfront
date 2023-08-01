@@ -27,6 +27,10 @@ module.exports = {
           from: 'public/images',
           to: './images',
         },
+        {
+          from: 'public',
+          to: './',
+        },
       ],
     }),
   ],
