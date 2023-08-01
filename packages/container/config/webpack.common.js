@@ -28,6 +28,10 @@ module.exports = {
           to: './images',
         },
         {
+          from: 'public/css',
+          to: './css',
+        },
+        {
           from: 'public',
           to: './',
         },
