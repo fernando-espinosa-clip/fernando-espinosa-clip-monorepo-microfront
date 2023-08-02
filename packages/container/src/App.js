@@ -28,7 +28,7 @@ const Routes = () => {
       return history.push('/cpanel/dashboard');
     }
     if(location.pathname !== '/auth/signin') {
-      history.push('/')
+      history.push('/shop')
     }
   }, [isSignedIn]);
   return <Suspense fallback={<Progress />}>
