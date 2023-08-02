@@ -1,26 +1,16 @@
 import { mount } from 'auth/AuthApp';
-import React, { useRef, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Box } from '@mui/material';
+import React from 'react';
+import storage from '../utils/storage'
 
-export default ({ onSignIn }) => {
-  const ref = useRef(null);
-  const history = useHistory();
+import useMount from '../hooks/useMount';
 
-  useEffect(() => {
-    const { onParentNavigate } = mount(ref.current, {
-      initialPath: history.location.pathname,
-      onNavigate: ({ pathname: nextPathname }) => {
-        const { pathname } = history.location;
-
-        if (pathname !== nextPathname) {
-          history.push(nextPathname);
-        }
-      },
-      onSignIn,
-    });
-
-    history.listen(onParentNavigate);
-  }, []);
-
-  return <div ref={ref} />;
+export default (props) => {
+  const { ref } = useMount({
+    mount,
+    storage,
+    ...props,
+  });
+  return <Box sx={{ width: '100%' }} id="mfe-react-ecommerce" ref={ref} />;
 };
+

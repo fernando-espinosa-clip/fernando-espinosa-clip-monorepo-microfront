@@ -33,6 +33,24 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 
+const users = [
+    {
+        email: 'my@email.com',
+        password: 'S0m3P455w0rd!',
+        uuid: '09917a3f-6810-4291-9d8a-28fcfb4c91ff',
+    },
+    {
+        email: 'other@email.com',
+        password: 'S0m3P455w0rd!',
+        uuid: 'dfeed48f-082f-4799-9efa-49e5fd5da75b',
+    },
+    {
+        email: 'test@email.com',
+        password: 'S0m3P455w0rd!',
+        uuid: 'a6617fe9-0f1a-4105-b33e-e4f6c76acb6e',
+    },
+]
+
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ onSignIn, ...others }) => {
@@ -68,7 +86,7 @@ const FirebaseLogin = ({ onSignIn, ...others }) => {
             <Formik
                 initialValues={{
                     email: 'my@email.com',
-                    password: '123456',
+                    password: 'S0m3P455w0rd!',
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
@@ -77,10 +95,13 @@ const FirebaseLogin = ({ onSignIn, ...others }) => {
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
-                        if (scriptedRef.current) {
+                        const userFound = users.find((u) => u.email === values.email && u.password === values.password)
+                        if (scriptedRef.current && userFound) {
                             setStatus({ success: true });
                             setSubmitting(false);
-                            onSignIn ? onSignIn() : null;
+                            onSignIn ? onSignIn(userFound) : null;
+                        } else {
+                            throw new Error('User is not correct');
                         }
                     } catch (err) {
                         console.error(err);
@@ -166,7 +187,7 @@ const FirebaseLogin = ({ onSignIn, ...others }) => {
                         </Stack>
                         {errors.submit && (
                             <Box sx={{ mt: 3 }}>
-                                <FormHelperText error>{errors.submit}</FormHelperText>
+                                <FormHelperText error sx={{ color: 'red', fontWeight: 'bold', fontSize: 20, textAlign: 'center'}}>{errors.submit}</FormHelperText>
                             </Box>
                         )}
 

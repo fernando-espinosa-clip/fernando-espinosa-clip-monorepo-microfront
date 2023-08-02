@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
-    backgroundColor: 'white',
+    backgroundColor: '#EAEAEA',
   },
   toolbar: {
     flexWrap: 'wrap',
@@ -84,10 +84,10 @@ export default function Header({ isSignedIn, onSignOut }) {
           </Typography>
           <Button
             color="primary"
-            variant="outlined"
+            variant="contained"
             className={classes.link}
             component={RouterLink}
-            to={isSignedIn ? '/' : '/auth/signin'}
+            to={isSignedIn ? '/auth/signout' : '/auth/signin'}
             onClick={onClick}
           >
             {isSignedIn ? 'Logout' : 'Login'}

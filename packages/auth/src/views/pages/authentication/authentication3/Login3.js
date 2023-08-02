@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 // material-ui
@@ -16,10 +16,13 @@ import AuthFooter from '../../../../components/cards/AuthFooter';
 
 // ================================|| AUTH - LOGIN ||================================ //
 
-const Login = ({ onSignIn }) => {
+const Login = ({ onSignIn, storage }) => {
     const theme = useTheme();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-
+    const saveToken = useCallback((user) => {
+        storage.setCookie('dev_access_token', user.uuid);
+        onSignIn()
+    },[onSignIn, storage])
     return (
         <AuthWrapper1>
             <Grid container direction="column" justifyContent="flex-end" sx={{ minHeight: '100vh' }}>
@@ -54,7 +57,7 @@ const Login = ({ onSignIn }) => {
                                         </Grid>
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <AuthLogin onSignIn={onSignIn} />
+                                        <AuthLogin onSignIn={saveToken} />
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Divider />

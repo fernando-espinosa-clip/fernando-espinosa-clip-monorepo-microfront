@@ -8,18 +8,24 @@ import {
 } from '@mui/styles';
 
 import theme from './themes'
-import Signin from './views/pages/authentication/authentication3/Login3';
+import SignIn from './views/pages/authentication/authentication3/Login3';
 import Signup from './views/pages/authentication/authentication3/Register3';
 
 const generateClassName = createGenerateClassName({
   productionPrefix: 'au',
 });
 
+const SignOut = ({ onSignOut, storage }) => {
+  storage.deleteCookie('dev_access_token')
+  onSignOut();
+  return null
+}
+
 const Default = () => {
   return <div>Estas en Root</div>
 }
 
-export default ({ history, onSignIn }) => {
+export default ({ history, ...rest }) => {
   return (
     <div>
       <StyledEngineProvider>
@@ -31,10 +37,13 @@ export default ({ history, onSignIn }) => {
                   <Default />
                 </Route>
                 <Route path="/auth/signin">
-                  <Signin onSignIn={onSignIn} />
+                  <SignIn {...rest} />
                 </Route>
                 <Route path="/auth/signup">
-                  <Signup onSignIn={onSignIn} />
+                  <Signup {...rest} />
+                </Route>
+                <Route path="/auth/signout">
+                  <SignOut {...rest} />
                 </Route>
               </Switch>
             </Router>
