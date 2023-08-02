@@ -7,7 +7,7 @@ export const handlers = [
     rest.get("/api/blogs", (req, res, ctx) => {
         return res(ctx.json(blogs));
     }),
-    rest.post("http://some.fake.api.com/login", async (req, res, ctx) => {
+    rest.post("/login", async (req, res, ctx) => {
         const { email, password } = await req.json();
         const userFound = users.find((u) => u.email === email && u.password === password)
         if (userFound) {

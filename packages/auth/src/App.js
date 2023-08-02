@@ -41,7 +41,6 @@ export default ({ history, ...rest }) => {
                 </Route>
                 <Route path="/auth/signin">
                   <>
-                    <Default />
                     <SignIn {...rest} />
                   </>
                 </Route>

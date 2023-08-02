@@ -96,7 +96,7 @@ const FirebaseLogin = ({ onSignIn, ...others }) => {
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
-                        const { data: token } = await axios.post('http://some.fake.api.com/login', { email: values.email, password: values.password })
+                        const { data: token } = await axios.post('/login', { email: values.email, password: values.password })
                         if (scriptedRef.current) {
                             setStatus({ success: true });
                             setSubmitting(false);
