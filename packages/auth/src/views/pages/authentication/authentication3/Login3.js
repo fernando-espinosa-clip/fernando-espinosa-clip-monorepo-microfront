@@ -19,8 +19,8 @@ import AuthFooter from '../../../../components/cards/AuthFooter';
 const Login = ({ onSignIn, storage }) => {
     const theme = useTheme();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-    const saveToken = useCallback((user) => {
-        storage.setCookie('dev_access_token', user.uuid);
+    const saveToken = useCallback((uuid) => {
+        storage.setCookie('dev_access_token', uuid);
         onSignIn()
     },[onSignIn, storage])
     return (

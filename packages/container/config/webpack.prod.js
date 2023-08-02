@@ -3,6 +3,7 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const commonConfig = require('./webpack.common');
 const sharedFunctions = require('./shared.functions');
 const Dotenv = require('dotenv-webpack');
+const CopyPlugin = require("copy-webpack-plugin");
 
 // const domain = process.env.PRODUCTION_DOMAIN;
 
@@ -25,6 +26,21 @@ const prodConfig = {
     }),
     new Dotenv({
       systemvars: true,
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'public/images',
+          to: './images',
+        },
+        {
+          from: 'public/css',
+          to: './css',
+        },
+        {
+          from: 'public/',
+        },
+      ],
     }),
   ],
 };

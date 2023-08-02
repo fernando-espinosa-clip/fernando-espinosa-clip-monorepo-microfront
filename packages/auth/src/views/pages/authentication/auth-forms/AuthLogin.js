@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -95,13 +96,11 @@ const FirebaseLogin = ({ onSignIn, ...others }) => {
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
-                        const userFound = users.find((u) => u.email === values.email && u.password === values.password)
-                        if (scriptedRef.current && userFound) {
+                        const { data: token } = await axios.post('http://some.fake.api.com/login', { email: values.email, password: values.password })
+                        if (scriptedRef.current) {
                             setStatus({ success: true });
                             setSubmitting(false);
-                            onSignIn ? onSignIn(userFound) : null;
-                        } else {
-                            throw new Error('User is not correct');
+                            onSignIn ? onSignIn(token) : null;
                         }
                     } catch (err) {
                         console.error(err);

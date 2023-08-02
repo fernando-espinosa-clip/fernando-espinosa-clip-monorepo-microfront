@@ -16,11 +16,13 @@
     "@mui/styles": "^5.0.1",
     "@mui/system": "^5.0.3",
     "@mui/utils": "^5.8.6",
+    "axios": "^1.4.0",
     "clsx": "^1.1.1",
     "crypto-js": "^4.1.1",
     "formik": "^2.2.6",
     "framer-motion": "^4.1.13",
     "js-cookie": "^3.0.5",
+    "msw": "^1.2.3",
     "prop-types": "^15.8.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -45,5 +47,8 @@
     "webpack-cli": "^4.1.0",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.2.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

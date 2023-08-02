@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, Router } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
 import {
-  StylesProvider,
   createGenerateClassName,
 } from '@mui/styles';
+import axios from 'axios';
 
 import theme from './themes'
 import SignIn from './views/pages/authentication/authentication3/Login3';
@@ -22,6 +22,9 @@ const SignOut = ({ onSignOut, storage }) => {
 }
 
 const Default = () => {
+  useEffect(() => {
+    axios.get('/api/blogs').then((r) => console.log(r.data))
+  }, []);
   return <div>Estas en Root</div>
 }
 
@@ -37,7 +40,10 @@ export default ({ history, ...rest }) => {
                   <Default />
                 </Route>
                 <Route path="/auth/signin">
-                  <SignIn {...rest} />
+                  <>
+                    <Default />
+                    <SignIn {...rest} />
+                  </>
                 </Route>
                 <Route path="/auth/signup">
                   <Signup {...rest} />
