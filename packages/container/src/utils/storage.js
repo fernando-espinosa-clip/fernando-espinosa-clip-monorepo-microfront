@@ -1,7 +1,9 @@
 import CryptoJS from 'crypto-js'
 import Cookies from 'js-cookie'
 
-const secretKey = (cookieName = 'dev_access_token') => getCookie(cookieName) || 'ds87f6as87f68sd76fsbfbbfsd6f8764l5kk';
+const tokenName = 'dev_access_token_cp'
+
+const secretKey = (cookieName = tokenName) => getCookie(cookieName) || 'ds87f6as87f68sd76fsbfbbfsd6f8764l5kk';
 
 export const encryptStorage = (name, data) => {
     const encrypt = CryptoJS.AES.encrypt(
@@ -25,6 +27,12 @@ export const decryptStorage = (name) => {
 
 }
 
+export const getAuthToken = () => Cookies.get(tokenName)
+
+export const setAuthToken = (value) => Cookies.set(tokenName, value)
+
+export const deleteAuthToken = () => Cookies.remove(tokenName)
+
 export const setCookie = (name, value) => Cookies.set(name, value);
 
 export const getCookie = (name) => Cookies.get(name);
@@ -37,4 +45,7 @@ export default {
     setCookie,
     getCookie,
     deleteCookie,
+    getAuthToken,
+    setAuthToken,
+    deleteAuthToken,
 }

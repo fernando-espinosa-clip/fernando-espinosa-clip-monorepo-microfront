@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
 import Layout from './layouts/dashboard/layout'
-import storage from './utils/storage'
+import storage, {getAuthToken} from './utils/storage'
 import axios from 'axios';
 
 const MarketingLazy = lazy(() => import('./components/MarketingApp'));
@@ -23,7 +23,7 @@ const theTheme = theme({})
 const Routes = () => {
   const location = useLocation();
   const [isSignedIn, setIsSignedIn] = useState(() => {
-    return storage.getCookie('dev_access_token')
+    return storage.getAuthToken()
   });
 
   useEffect(() => {

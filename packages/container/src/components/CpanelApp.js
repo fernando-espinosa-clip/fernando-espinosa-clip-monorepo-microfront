@@ -1,25 +1,12 @@
 import { mount } from 'cpanel/CpanelApp';
-import React, { useRef, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+import useMount from "../hooks/useMount";
 
-export default () => {
-    const ref = useRef(null);
-    const history = useHistory();
+export default (props) => {
+    const { ref } = useMount({
+        mount,
+        ...props,
+    });
 
-    useEffect(() => {
-        const { onParentNavigate } = mount(ref.current, {
-            initialPath: history.location.pathname,
-            onNavigate: ({ pathname: nextPathname }) => {
-                const { pathname } = history.location;
-
-                if (pathname !== nextPathname) {
-                    history.push(nextPathname);
-                }
-            },
-        });
-
-        history.listen(onParentNavigate);
-    }, []);
-
-    return <div ref={ref} />;
+    return <div data-testid="cPanel-MFE" ref={ref} />;
 };

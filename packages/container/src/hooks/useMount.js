@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import { DecodedURLParams } from '../utils/decodedURLParams';
+import storage from '../utils/storage';
 
 export const useMount = (props) => {
     const ref = useRef(null);
@@ -11,6 +12,7 @@ export const useMount = (props) => {
     const search = location.search.slice(1);
     useEffect(() => {
         const { onParentNavigate, onUnmount } = mount(ref.current, {
+            storage,
             initialPath: history.location.pathname + location.search,
             query: new DecodedURLParams(search),
             onNavigate: (props) => {
