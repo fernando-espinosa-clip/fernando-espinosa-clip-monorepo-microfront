@@ -96,8 +96,14 @@ const iconMap = {
 };
 
 export const OverviewTraffic = (props) => {
-  const { chartSeries, labels, sx, status } = props;
+  const { sx, status, trafficSources } = props;
+  const labels = React.useMemo(() => {
+    return !trafficSources ? [] : trafficSources.map((item) => item.source);
+  }, [trafficSources]);
   const chartOptions = useChartOptions(labels);
+  const chartSeries = React.useMemo(() => {
+    return !trafficSources ? [] : trafficSources.map((item) => item.amount);
+  }, [trafficSources]);
 
   return (
     <Card sx={sx}>
@@ -108,8 +114,8 @@ export const OverviewTraffic = (props) => {
           <>
             <Chart height={300} options={chartOptions} series={chartSeries} type="donut" width="100%" />
             <Stack alignItems="center" direction="row" justifyContent="center" spacing={2} sx={{ mt: 2 }}>
-              {chartSeries.map((item, index) => {
-                const label = labels[index];
+              {trafficSources.map((item) => {
+                const label = item.source;
                 return (
                   <Box
                     key={label}
@@ -124,7 +130,7 @@ export const OverviewTraffic = (props) => {
                       {label}
                     </Typography>
                     <Typography color="text.secondary" variant="subtitle2">
-                      {item}%
+                      {item.amount}%
                     </Typography>
                   </Box>
                 );
@@ -138,7 +144,7 @@ export const OverviewTraffic = (props) => {
 };
 
 OverviewTraffic.propTypes = {
-  chartSeries: PropTypes.array.isRequired,
-  labels: PropTypes.array.isRequired,
+  trafficSources: PropTypes.array.isRequired,
+  status: PropTypes.oneOf(['idle', 'error', 'loading', 'success']).isRequired,
   sx: PropTypes.object,
 };
