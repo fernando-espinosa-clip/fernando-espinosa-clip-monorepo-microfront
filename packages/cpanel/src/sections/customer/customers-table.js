@@ -12,10 +12,42 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography
+  Typography,
 } from '@mui/material';
 import { getInitials } from '../../utils/get-initials';
-import React from 'react';
+import React, { memo } from 'react';
+
+const CustomersTableRowBase = (props) => {
+  const { id, address, avatar, createdAt, name, email, isSelected, phone, onSelectOne, onDeselectOne } = props;
+  return (
+    <TableRow hover key={id} selected={isSelected}>
+      <TableCell padding="checkbox">
+        <Checkbox
+          checked={isSelected}
+          onChange={(event) => {
+            if (event.target.checked) {
+              console.log(id);
+              onSelectOne?.(id);
+            } else {
+              onDeselectOne?.(id);
+            }
+          }}
+        />
+      </TableCell>
+      <TableCell>
+        <Stack alignItems="center" direction="row" spacing={2}>
+          <Avatar src={avatar}>{getInitials(name)}</Avatar>
+          <Typography variant="subtitle2">{name}</Typography>
+        </Stack>
+      </TableCell>
+      <TableCell>{email}</TableCell>
+      <TableCell>{address}</TableCell>
+      <TableCell>{phone}</TableCell>
+      <TableCell>{createdAt}</TableCell>
+    </TableRow>
+  );
+};
+const CustomersTableRow = memo(CustomersTableRowBase);
 
 export const CustomersTable = (props) => {
   const {
@@ -29,103 +61,61 @@ export const CustomersTable = (props) => {
     onSelectOne,
     page = 0,
     rowsPerPage = 0,
-    selected = []
+    selected = [],
   } = props;
 
-  const selectedSome = (selected.length > 0) && (selected.length < items.length);
-  const selectedAll = (items.length > 0) && (selected.length === items.length);
+  const selectedSome = selected.length > 0 && selected.length < items.length;
+  const selectedAll = items.length > 0 && selected.length === items.length;
 
   return (
     <Card>
-        <Box sx={{ minWidth: 800 }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selectedAll}
-                    indeterminate={selectedSome}
-                    onChange={(event) => {
-                      if (event.target.checked) {
-                        onSelectAll?.();
-                      } else {
-                        onDeselectAll?.();
-                      }
-                    }}
-                  />
-                </TableCell>
-                <TableCell>
-                  Name
-                </TableCell>
-                <TableCell>
-                  Email
-                </TableCell>
-                <TableCell>
-                  Location
-                </TableCell>
-                <TableCell>
-                  Phone
-                </TableCell>
-                <TableCell>
-                  Signed Up
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {items.map((customer) => {
-                const isSelected = selected.includes(customer.id);
-                const createdAt = format(customer.createdAt, 'dd/MM/yyyy');
-
-                return (
-                  <TableRow
-                    hover
-                    key={customer.id}
-                    selected={isSelected}
-                  >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        checked={isSelected}
-                        onChange={(event) => {
-                          if (event.target.checked) {
-                            onSelectOne?.(customer.id);
-                          } else {
-                            onDeselectOne?.(customer.id);
-                          }
-                        }}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Stack
-                        alignItems="center"
-                        direction="row"
-                        spacing={2}
-                      >
-                        <Avatar src={customer.avatar}>
-                          {getInitials(customer.name)}
-                        </Avatar>
-                        <Typography variant="subtitle2">
-                          {customer.name}
-                        </Typography>
-                      </Stack>
-                    </TableCell>
-                    <TableCell>
-                      {customer.email}
-                    </TableCell>
-                    <TableCell>
-                      {customer.address.city}, {customer.address.state}, {customer.address.country}
-                    </TableCell>
-                    <TableCell>
-                      {customer.phone}
-                    </TableCell>
-                    <TableCell>
-                      {createdAt}
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </Box>
+      <Box sx={{ minWidth: 800 }}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell padding="checkbox">
+                <Checkbox
+                  checked={selectedAll}
+                  indeterminate={selectedSome}
+                  onChange={(event) => {
+                    if (event.target.checked) {
+                      onSelectAll?.();
+                    } else {
+                      onDeselectAll?.();
+                    }
+                  }}
+                />
+              </TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Location</TableCell>
+              <TableCell>Phone</TableCell>
+              <TableCell>Signed Up</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {items.map((customer) => {
+              const isSelected = selected.includes(customer.id);
+              const createdAt = format(new Date(customer.createdAt), 'dd/MM/yyyy');
+              return (
+                <CustomersTableRow
+                  key={customer.id}
+                  id={customer.id}
+                  avatar={customer.avatar}
+                  name={customer.name}
+                  email={customer.email}
+                  address={customer.address}
+                  phone={customer.phone}
+                  isSelected={isSelected}
+                  createdAt={createdAt}
+                  onDeselectOne={onDeselectOne}
+                  onSelectOne={onSelectOne}
+                />
+              );
+            })}
+          </TableBody>
+        </Table>
+      </Box>
       <TablePagination
         component="div"
         count={count}
@@ -150,5 +140,5 @@ CustomersTable.propTypes = {
   onSelectOne: PropTypes.func,
   page: PropTypes.number,
   rowsPerPage: PropTypes.number,
-  selected: PropTypes.array
+  selected: PropTypes.array,
 };

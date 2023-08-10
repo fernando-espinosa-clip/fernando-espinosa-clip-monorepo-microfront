@@ -18,7 +18,6 @@ const Page = (props) => {
   const { status, data } = useDashboard(storage);
   const { status: productsStatus, data: productsData } = useProducts(storage);
   const { status: ordersStatus, data: ordersData } = useOrders(storage);
-  console.log(ordersData);
   return (
     <>
       <Box

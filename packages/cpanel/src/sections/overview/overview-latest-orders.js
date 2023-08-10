@@ -72,7 +72,7 @@ export const OverviewLatestOrders = (props) => {
                       <TableCell>{fullName}</TableCell>
                       <TableCell>{createdAt}</TableCell>
                       <TableCell>
-                        <SeverityPill color={statusMap[order.status]}>{order.status}</SeverityPill>
+                        <SeverityPill color={order.status}>{order.status}</SeverityPill>
                       </TableCell>
                     </TableRow>
                   );

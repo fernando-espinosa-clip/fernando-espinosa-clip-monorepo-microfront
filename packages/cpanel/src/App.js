@@ -47,7 +47,7 @@ export default function App(props) {
                 <Account />
               </Route>
               <Route path="/cpanel/customers">
-                <Customers />
+                <Customers {...rest} />
               </Route>
               <Route path="/cpanel/companies">
                 <Companies />
