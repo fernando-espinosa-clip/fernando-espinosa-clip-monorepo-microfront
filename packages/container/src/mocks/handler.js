@@ -4,20 +4,9 @@ import { users } from './data/users';
 import { mainData } from './data/dashboard';
 import { products } from './data/products';
 import { orders } from './data/orders';
-import { customers1 } from './data/customers';
-import subMinutes from 'date-fns/subMinutes';
+import { customers1 as customers } from './data/customers';
+import { getRandomArbitrary } from '../utils/generatorUtilities';
 
-const uuidv4 = () => {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    const r = (Math.random() * 16) | 0,
-      v = c === 'x' ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
-};
-
-function getRandomArbitrary(min, max) {
-  return Math.round(Math.random() * (max - min) + min);
-}
 const sortProductsByUpdatedAt = (a, b) => {
   if (a.updatedAt > b.updatedAt) {
     return -1;
@@ -61,7 +50,15 @@ export const handlers = [
     return res(ctx.json(response));
   }),
   rest.get('/api/orders/latest', async (req, res, ctx) => {
-    const response = await waitFor(orders, getRandomArbitrary(700, 2500));
+    const filteredOrders = orders.slice(0, 7);
+    filteredOrders.forEach((o) => {
+      o.customer = customers.find((c) => c.id === o.customer);
+    });
+    const response = await waitFor(filteredOrders, getRandomArbitrary(700, 2500));
+    return res(ctx.json(response));
+  }),
+  rest.get('/api/customers', async (req, res, ctx) => {
+    const response = await waitFor(customers, getRandomArbitrary(500, 2000));
     return res(ctx.json(response));
   }),
 ];
