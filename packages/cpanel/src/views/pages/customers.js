@@ -24,7 +24,7 @@ const useCustomerIds = (customers) => {
 
 const Page = (props) => {
   const { storage } = props;
-  const { data } = useCustomersData(storage);
+  const { data, status } = useCustomersData(storage);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const customers = useCustomers(data || [], page, rowsPerPage);
@@ -103,6 +103,7 @@ const Page = (props) => {
               page={page}
               rowsPerPage={rowsPerPage}
               selected={customersSelection.selected}
+              status={status}
             />
           </Stack>
         </Container>

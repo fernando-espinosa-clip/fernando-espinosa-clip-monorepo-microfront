@@ -13,14 +13,38 @@ import {
   TablePagination,
   TableRow,
   Typography,
+  Skeleton,
 } from '@mui/material';
 import { getInitials } from '../../utils/get-initials';
 import React, { memo } from 'react';
 
+const SkeletonTableRow = () => (
+  <TableRow hover>
+    <TableCell padding="checkbox">
+      <Skeleton width={30} height={20} />
+    </TableCell>
+    <TableCell>
+      <Skeleton width={80} height={20} />
+    </TableCell>
+    <TableCell>
+      <Skeleton width={150} height={20} />
+    </TableCell>
+    <TableCell>
+      <Skeleton width={150} height={20} />
+    </TableCell>
+    <TableCell>
+      <Skeleton width={150} height={20} />
+    </TableCell>
+    <TableCell>
+      <Skeleton width={100} height={20} />
+    </TableCell>
+  </TableRow>
+);
+
 const CustomersTableRowBase = (props) => {
   const { id, address, avatar, createdAt, name, email, isSelected, phone, onSelectOne, onDeselectOne } = props;
   return (
-    <TableRow hover key={id} selected={isSelected}>
+    <TableRow hover selected={isSelected}>
       <TableCell padding="checkbox">
         <Checkbox
           checked={isSelected}
@@ -62,6 +86,7 @@ export const CustomersTable = (props) => {
     page = 0,
     rowsPerPage = 0,
     selected = [],
+    status,
   } = props;
 
   const selectedSome = selected.length > 0 && selected.length < items.length;
@@ -74,17 +99,19 @@ export const CustomersTable = (props) => {
           <TableHead>
             <TableRow>
               <TableCell padding="checkbox">
-                <Checkbox
-                  checked={selectedAll}
-                  indeterminate={selectedSome}
-                  onChange={(event) => {
-                    if (event.target.checked) {
-                      onSelectAll?.();
-                    } else {
-                      onDeselectAll?.();
-                    }
-                  }}
-                />
+                {status === 'success' && (
+                  <Checkbox
+                    checked={selectedAll}
+                    indeterminate={selectedSome}
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        onSelectAll?.();
+                      } else {
+                        onDeselectAll?.();
+                      }
+                    }}
+                  />
+                )}
               </TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
@@ -94,25 +121,27 @@ export const CustomersTable = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {items.map((customer) => {
-              const isSelected = selected.includes(customer.id);
-              const createdAt = format(new Date(customer.createdAt), 'dd/MM/yyyy');
-              return (
-                <CustomersTableRow
-                  key={customer.id}
-                  id={customer.id}
-                  avatar={customer.avatar}
-                  name={customer.name}
-                  email={customer.email}
-                  address={customer.address}
-                  phone={customer.phone}
-                  isSelected={isSelected}
-                  createdAt={createdAt}
-                  onDeselectOne={onDeselectOne}
-                  onSelectOne={onSelectOne}
-                />
-              );
-            })}
+            {status === 'loading' && [1, 2, 3, 4, 5].map((e) => <SkeletonTableRow key={e} />)}
+            {status === 'success' &&
+              items.map((customer) => {
+                const isSelected = selected.includes(customer.id);
+                const createdAt = format(new Date(customer.createdAt), 'dd/MM/yyyy');
+                return (
+                  <CustomersTableRow
+                    key={customer.id}
+                    id={customer.id}
+                    avatar={customer.avatar}
+                    name={customer.name}
+                    email={customer.email}
+                    address={customer.address}
+                    phone={customer.phone}
+                    isSelected={isSelected}
+                    createdAt={createdAt}
+                    onDeselectOne={onDeselectOne}
+                    onSelectOne={onSelectOne}
+                  />
+                );
+              })}
           </TableBody>
         </Table>
       </Box>
