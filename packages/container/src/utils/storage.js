@@ -33,16 +33,6 @@ export const getCookie = (name) => Cookies.get(name);
 
 export const deleteCookie = (name) => Cookies.remove(name);
 
-const getValue = (k) => process.env[k];
-
-export const config = {
-  var1: process.env.VAR1,
-  var2: process.env.VAR2,
-  var3: process.env.VAR3,
-  apikey: process.env.APIKEY,
-  secret: process.env.SECRET,
-};
-
 export default {
   encryptStorage,
   decryptStorage,
@@ -52,5 +42,4 @@ export default {
   getAuthToken,
   setAuthToken,
   deleteAuthToken,
-  config,
 };
