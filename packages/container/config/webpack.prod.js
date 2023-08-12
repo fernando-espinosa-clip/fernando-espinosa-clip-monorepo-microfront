@@ -3,7 +3,7 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const commonConfig = require('./webpack.common');
 const sharedFunctions = require('./shared.functions');
 const Dotenv = require('dotenv-webpack');
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 // const domain = process.env.PRODUCTION_DOMAIN;
 

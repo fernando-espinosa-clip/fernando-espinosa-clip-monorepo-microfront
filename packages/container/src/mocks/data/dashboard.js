@@ -1,14 +1,16 @@
+import { getRandomArbitrary } from '../../utils/generatorUtilities';
+
 export const mainData = {
   budget: {
-    amount: 24,
-    comparative: '12',
+    amount: `${getRandomArbitrary(2400, 35000) / 100} k`,
+    comparative: getRandomArbitrary(-50, 50),
   },
   totalCostumers: {
-    amount: 1.6,
-    comparative: '-16',
+    amount: `${getRandomArbitrary(-1000, 15000) / 1000} k`,
+    comparative: getRandomArbitrary(-50, 50),
   },
-  dayProgress: 75.5,
-  totalProfit: 15,
+  dayProgress: getRandomArbitrary(20, 90),
+  totalProfit: getRandomArbitrary(15, 80),
   sales: [
     {
       name: 'This year',

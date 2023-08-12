@@ -5,19 +5,22 @@ const tokenName = 'dev_access_token_cp';
 
 const secretKey = (cookieName = tokenName) => getCookie(cookieName) || 'ds87f6as87f68sd76fsbfbbfsd6f8764l5kk';
 
-export const encryptStorage = (name, data) => {
-  const encrypt = CryptoJS.AES.encrypt(JSON.stringify(data), secretKey()).toString();
+export const enc = (data) => CryptoJS.AES.encrypt(JSON.stringify(data), secretKey()).toString();
 
+export const dec = (data) => CryptoJS.AES.decrypt(data, secretKey()).toString(CryptoJS.enc.Utf8);
+
+export const encryptStorage = (name, data) => {
+  const encrypt = enc(data);
   localStorage.setItem(name, encrypt);
 };
 
 export const decryptStorage = (name) => {
   try {
     const encrypt = localStorage.getItem(name);
-    const decrypt = CryptoJS.AES.decrypt(encrypt, secretKey()).toString(CryptoJS.enc.Utf8);
+    const decrypt = dec(encrypt);
     return JSON.parse(decrypt);
   } catch (e) {
-    console.log('Te la pelaste');
+    console.log('salio algo mal', e);
   }
 };
 
@@ -42,4 +45,6 @@ export default {
   getAuthToken,
   setAuthToken,
   deleteAuthToken,
+  enc,
+  dec,
 };

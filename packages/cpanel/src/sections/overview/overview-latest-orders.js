@@ -65,7 +65,7 @@ export const OverviewLatestOrders = (props) => {
               {status === 'success' &&
                 orders.map((order) => {
                   const createdAt = format(new Date(order.createdAt), 'dd/MM/yyyy');
-                  const fullName = `${order.customer.first_name} ${order.customer.last_name}`;
+                  const fullName = `${order.customer?.first_name || ''} ${order.customer?.last_name || ''}`;
                   return (
                     <TableRow hover key={order.id}>
                       <TableCell>{order.ref}</TableCell>

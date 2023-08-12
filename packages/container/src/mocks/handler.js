@@ -5,7 +5,7 @@ import { mainData } from './data/dashboard';
 import { products } from './data/products';
 import { orders } from './data/orders';
 import { customers1 as customers } from './data/customers';
-import { getRandomArbitrary } from '../utils/generatorUtilities';
+import { getRandomArbitrary, cloneObj } from '../utils/generatorUtilities';
 
 const sortProductsByUpdatedAt = (a, b) => {
   if (a.updatedAt > b.updatedAt) {
@@ -50,10 +50,11 @@ export const handlers = [
     return res(ctx.json(response));
   }),
   rest.get('/api/orders/latest', async (req, res, ctx) => {
-    const filteredOrders = orders.slice(0, 7);
+    const filteredOrders = cloneObj(orders.slice(0, 7));
     filteredOrders.forEach((o) => {
       o.customer = customers.find((c) => c.id === o.customer);
     });
+    console.log('se crearon ordenes');
     const response = await waitFor(filteredOrders, getRandomArbitrary(700, 2500));
     return res(ctx.json(response));
   }),

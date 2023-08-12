@@ -31,11 +31,11 @@ const mount = (el, { onSignIn, onNavigate, defaultHistory, initialPath, ...rest 
 // If we are in development and in isolation,
 // call mount immediately
 // if (process.env.NODE_ENV === 'development') {
-  const devRoot = document.querySelector('#_cpanel-dev-root');
+const devRoot = document.querySelector('#_cpanel-dev-root');
 
-  if (devRoot) {
-    mount(devRoot, { defaultHistory: createBrowserHistory() });
-  }
+if (devRoot) {
+  mount(devRoot, { defaultHistory: createBrowserHistory() });
+}
 // }
 
 // We are running through container

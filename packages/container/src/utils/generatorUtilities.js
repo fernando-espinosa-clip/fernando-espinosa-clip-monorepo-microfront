@@ -16,3 +16,22 @@ export const uuidv4 = () => {
 export function getRandomArbitrary(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
+
+export function cloneObj(aObject) {
+  // Prevent undefined objects
+  // if (!aObject) return aObject;
+
+  let bObject = Array.isArray(aObject) ? [] : {};
+
+  let value;
+  for (const key in aObject) {
+    // Prevent self-references to parent object
+    // if (Object.is(aObject[key], aObject)) continue;
+
+    value = aObject[key];
+
+    bObject[key] = typeof value === 'object' ? cloneObj(value) : value;
+  }
+
+  return bObject;
+}

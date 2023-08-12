@@ -9,6 +9,8 @@ import Account from './views/pages/account';
 import Customers from './views/pages/customers';
 import Companies from './views/pages/companies';
 import NotFound from './views/pages/404';
+import { persistQueryClient } from 'react-query/persistQueryClient-experimental';
+import { createWebStoragePersistor } from 'react-query/createWebStoragePersistor-experimental';
 
 import { createTheme } from './themes';
 
@@ -27,6 +29,31 @@ const queryClient = new QueryClient({
 
 export default function App(props) {
   const { history, ...rest } = props;
+  const { storage } = props;
+  const serialize = React.useCallback(
+    (str) => {
+      return storage.enc(str);
+    },
+    [storage]
+  );
+  const deserialize = React.useCallback(
+    (str) => {
+      return JSON.parse(storage.dec(str)); //storage.dec(str);
+    },
+    [storage]
+  );
+  const localStoragePersistor = React.useMemo(
+    () => createWebStoragePersistor({ storage: window.localStorage, serialize, deserialize }),
+    [deserialize, serialize]
+  );
+  React.useEffect(
+    () =>
+      persistQueryClient({
+        queryClient,
+        persistor: localStoragePersistor,
+      }),
+    [localStoragePersistor]
+  );
   return (
     <QueryClientProvider client={queryClient}>
       <StyledEngineProvider>

@@ -986,9 +986,10 @@ export const customers3 = [
     id: 'db24f2de-344d-46e9-a6e7-693d4296f50f',
   },
 ];
+
 /*
 function getEnvValues() {
-  let cont = 1;
+  let cont = 0;
   let inputID = document.getElementById('awsui-input-' + cont).value;
   while (inputID) {
     const val1 = inputID;
