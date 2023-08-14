@@ -1,10 +1,13 @@
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
 import { makeStyles } from '@mui/styles';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -32,10 +35,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(8, 0, 6),
   },
   cardHeader: {
-    backgroundColor:
-      theme.palette.type === 'light'
-        ? theme.palette.grey[200]
-        : theme.palette.grey[700],
+    backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[700],
   },
   cardPricing: {
     display: 'flex',
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header({ isSignedIn, onSignOut }) {
   const classes = useStyles();
-
+  const history = useHistory();
   const onClick = () => {
     if (isSignedIn && onSignOut) {
       onSignOut();
@@ -66,32 +66,33 @@ export default function Header({ isSignedIn, onSignOut }) {
 
   return (
     <React.Fragment>
-      <AppBar
-        position="static"
-        color="default"
-        elevation={0}
-        className={classes.appBar}
-      >
+      <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <Typography
-            variant="h6"
-            color="inherit"
-            noWrap
-            component={RouterLink}
-            to="/"
-          >
+          <Typography variant="h6" color="inherit" noWrap component={RouterLink} to="/">
             App
           </Typography>
-          <Button
-            color="primary"
-            variant="contained"
-            className={classes.link}
-            component={RouterLink}
-            to={isSignedIn ? '/auth/signout' : '/auth/signin'}
-            onClick={onClick}
-          >
-            {isSignedIn ? 'Logout' : 'Login'}
-          </Button>
+          <Box>
+            {isSignedIn && (
+              <IconButton
+                onClick={() => history.push('/cpanel/dashboard')}
+                color={'secondary'}
+                sx={{ mr: 2 }}
+                aria-label="delete"
+              >
+                <SettingsIcon />
+              </IconButton>
+            )}
+            <Button
+              color="primary"
+              variant="contained"
+              className={classes.link}
+              component={RouterLink}
+              to={isSignedIn ? '/auth/signout' : '/auth/signin'}
+              onClick={onClick}
+            >
+              {isSignedIn ? 'Logout' : 'Login'}
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
     </React.Fragment>
