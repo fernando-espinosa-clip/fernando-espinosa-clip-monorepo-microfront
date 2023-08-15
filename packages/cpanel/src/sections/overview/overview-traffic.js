@@ -96,7 +96,7 @@ const iconMap = {
 };
 
 export const OverviewTraffic = (props) => {
-  const { sx, status, trafficSources } = props;
+  const { sx, status, trafficSources, title } = props;
   const labels = React.useMemo(() => {
     return !trafficSources ? [] : trafficSources.map((item) => item.source);
   }, [trafficSources]);
@@ -107,7 +107,7 @@ export const OverviewTraffic = (props) => {
 
   return (
     <Card sx={sx}>
-      <CardHeader title="Traffic Source" />
+      <CardHeader title={title} />
       <CardContent>
         {status === 'loading' && <Skeleton />}
         {status === 'success' && (
@@ -144,7 +144,7 @@ export const OverviewTraffic = (props) => {
 };
 
 OverviewTraffic.propTypes = {
-  trafficSources: PropTypes.array.isRequired,
+  trafficSources: PropTypes.array,
   status: PropTypes.oneOf(['idle', 'error', 'loading', 'success']).isRequired,
   sx: PropTypes.object,
 };

@@ -6,7 +6,7 @@ import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/mate
 import React from 'react';
 
 export const OverviewBudget = (props) => {
-  const { difference, positive = false, sx, value } = props;
+  const { difference, positive = false, sx, value, title, comparativeText } = props;
 
   return (
     <Card sx={sx}>
@@ -14,7 +14,7 @@ export const OverviewBudget = (props) => {
         <Stack alignItems="flex-start" direction="row" justifyContent="space-between" spacing={3}>
           <Stack spacing={1}>
             <Typography color="text.secondary" variant="overline">
-              Budget
+              {title}
             </Typography>
             <Typography variant="h4">{value}</Typography>
           </Stack>
@@ -41,7 +41,7 @@ export const OverviewBudget = (props) => {
               </Typography>
             </Stack>
             <Typography color="text.secondary" variant="caption">
-              Since last month
+              {comparativeText}
             </Typography>
           </Stack>
         )}

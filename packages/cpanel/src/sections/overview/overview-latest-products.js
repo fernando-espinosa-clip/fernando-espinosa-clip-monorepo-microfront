@@ -22,17 +22,17 @@ import {
 const skeletonElements = [1, 2, 3, 4, 5];
 
 export const OverviewLatestProducts = (props) => {
-  const { products = [], sx, status } = props;
+  const { products = [], sx, status, title, formatPrefix, formatSuffix, viewAll } = props;
 
   return (
     <Card sx={sx}>
-      <CardHeader title="Latest Products" />
+      <CardHeader title={title} />
       {status === 'loading' && (
         <List>
           {skeletonElements.map((e, i) => {
             const hasDivider = i < skeletonElements.length - 1;
             return (
-              <ListItem divider={hasDivider} key={e.id}>
+              <ListItem divider={hasDivider} key={e}>
                 <ListItemAvatar>
                   <Skeleton
                     sx={{
@@ -44,7 +44,6 @@ export const OverviewLatestProducts = (props) => {
                   />
                 </ListItemAvatar>
                 <ListItemText
-                  compo
                   primary={<Skeleton width={'80%'} />}
                   primaryTypographyProps={{ variant: 'subtitle1' }}
                   secondary={<Skeleton width={'40%'} />}
@@ -91,7 +90,7 @@ export const OverviewLatestProducts = (props) => {
                 <ListItemText
                   primary={product.title}
                   primaryTypographyProps={{ variant: 'subtitle1' }}
-                  secondary={`Updated ${ago} ago`}
+                  secondary={`${formatPrefix} ${ago} ${formatSuffix}`}
                   secondaryTypographyProps={{ variant: 'body2' }}
                 />
                 <IconButton edge="end">
@@ -116,7 +115,7 @@ export const OverviewLatestProducts = (props) => {
           size="small"
           variant="text"
         >
-          View all
+          {viewAll}
         </Button>
       </CardActions>
     </Card>

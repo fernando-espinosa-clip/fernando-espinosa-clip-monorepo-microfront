@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createMemoryHistory, createBrowserHistory } from 'history';
 import App from './App';
+import './i18n';
 
 // Mount function to start up the app
 const mount = (el, { onSignIn, onNavigate, defaultHistory, initialPath, ...rest }) => {
@@ -39,5 +40,5 @@ if (devRoot) {
 // }
 
 // We are running through container
-// and we should export the mount function
+// ,and we should export the mount function
 export { mount };

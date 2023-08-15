@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Switch, Route, Router, Redirect } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
@@ -65,7 +65,9 @@ export default function App(props) {
                 <Redirect to={'/cpanel/dashboard'} />
               </Route>
               <Route path="/cpanel/dashboard">
-                <Dashboard {...rest} />
+                <Suspense fallback="loading">
+                  <Dashboard {...rest} />
+                </Suspense>
               </Route>
               <Route path="/cpanel/settings">
                 <Settings />

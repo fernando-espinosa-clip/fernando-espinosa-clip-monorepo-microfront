@@ -86,7 +86,7 @@ const useChartOptions = () => {
 };
 
 export const OverviewSales = (props) => {
-  const { chartSeries, sx, status } = props;
+  const { chartSeries, sx, status, title, overviewText, sync } = props;
   const chartOptions = useChartOptions();
 
   return (
@@ -102,10 +102,10 @@ export const OverviewSales = (props) => {
               </SvgIcon>
             }
           >
-            Sync
+            {sync}
           </Button>
         }
-        title="Sales"
+        title={title}
       />
       <CardContent>
         {status === 'loading' && <SkeletonChart />}
@@ -124,7 +124,7 @@ export const OverviewSales = (props) => {
           }
           size="small"
         >
-          Overview
+          {overviewText}
         </Button>
       </CardActions>
     </Card>

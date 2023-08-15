@@ -4,7 +4,7 @@ import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/mate
 import React from 'react';
 
 export const OverviewTotalProfit = (props) => {
-  const { value, sx } = props;
+  const { value, sx, title } = props;
 
   return (
     <Card sx={sx}>
@@ -12,7 +12,7 @@ export const OverviewTotalProfit = (props) => {
         <Stack alignItems="flex-start" direction="row" justifyContent="space-between" spacing={3}>
           <Stack spacing={1}>
             <Typography color="text.secondary" variant="overline">
-              Total Profit
+              {title}
             </Typography>
             <Typography variant="h4">{value}</Typography>
           </Stack>

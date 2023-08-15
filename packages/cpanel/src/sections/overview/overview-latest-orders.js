@@ -28,18 +28,18 @@ const statusMap = {
 const skeletonItems = [1, 2, 3, 4, 5, 6, 7, 8];
 
 export const OverviewLatestOrders = (props) => {
-  const { orders = [], sx, status } = props;
+  const { orders = [], sx, status, title, headers = {}, viewAll } = props;
   return (
     <Card sx={sx}>
-      <CardHeader title="Latest Orders" />
+      <CardHeader title={title} />
       <Box sx={{ minWidth: 800 }}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Order</TableCell>
-              <TableCell>Customer</TableCell>
-              <TableCell sortDirection="desc">Date</TableCell>
-              <TableCell>Status</TableCell>
+              <TableCell>{headers.order}</TableCell>
+              <TableCell>{headers.customer}</TableCell>
+              <TableCell sortDirection="desc">{headers.date}</TableCell>
+              <TableCell>{headers.status}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -93,7 +93,7 @@ export const OverviewLatestOrders = (props) => {
           size="small"
           variant="text"
         >
-          View all
+          {viewAll}
         </Button>
       </CardActions>
     </Card>
