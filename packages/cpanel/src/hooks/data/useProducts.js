@@ -10,7 +10,7 @@ export const fetchLatestProducts = async (lang) => {
   data.forEach((r) => (r.updatedAtToNow = formatDistanceToNow(new Date(r.updatedAt), { locale })));
   return data;
 };
-const useProducts = (storage, locale) => {
+const useProducts = (storage, locale = 'en-US') => {
   return useQuery(`products/latest/${locale}/${storage.getAuthToken()}`, () => fetchLatestProducts(locale));
 };
 export default useProducts;

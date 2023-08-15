@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next';
 const Page = (props) => {
   const { storage } = props;
   const { t, i18n } = useTranslation();
-  const { status, data } = useDashboard(storage);
+  const { status, data } = useDashboard(storage, i18n.language);
   const { status: productsStatus, data: productsData } = useProducts(storage, i18n.language);
   const { status: ordersStatus, data: ordersData } = useOrders(storage);
 
