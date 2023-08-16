@@ -52,7 +52,7 @@ export default function App(props) {
         queryClient,
         persistor: localStoragePersistor,
       }),
-    [localStoragePersistor]
+    []
   );
   return (
     <QueryClientProvider client={queryClient}>
