@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createMemoryHistory, createBrowserHistory } from 'history';
 import App from './App';
-import './i18n';
+import initI18n, { resources } from './i18n';
 
 // Mount function to start up the app
 const mount = (el, { onSignIn, onNavigate, defaultHistory, initialPath, ...rest }) => {
@@ -26,6 +26,7 @@ const mount = (el, { onSignIn, onNavigate, defaultHistory, initialPath, ...rest 
         history.push(nextPathname);
       }
     },
+    translators: resources,
   };
 };
 
@@ -35,6 +36,7 @@ const mount = (el, { onSignIn, onNavigate, defaultHistory, initialPath, ...rest 
 const devRoot = document.querySelector('#_cpanel-dev-root');
 
 if (devRoot) {
+  initI18n();
   mount(devRoot, { defaultHistory: createBrowserHistory() });
 }
 // }

@@ -26,7 +26,7 @@ const getMonths = (lang = 'en') => {
 
 const Page = (props) => {
   const { storage } = props;
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation('dashboard');
   const { status, data } = useDashboard(storage, i18n.language);
   const { status: productsStatus, data: productsData } = useProducts(storage, i18n.language);
   const { status: ordersStatus, data: ordersData } = useOrders(storage);
@@ -54,8 +54,8 @@ const Page = (props) => {
                 }}
                 sx={{ height: '100%' }}
                 status={status}
-                title={t('dashboard.budget')}
-                comparativeText={t('dashboard.sinceLastMonth')}
+                title={t('budget')}
+                comparativeText={t('sinceLastMonth')}
               />
             </Grid>
             <Grid xs={12} sm={6} lg={3}>
@@ -70,8 +70,8 @@ const Page = (props) => {
                 }}
                 sx={{ height: '100%' }}
                 status={status}
-                title={t('dashboard.totalCustomers')}
-                comparativeText={t('dashboard.sinceLastMonth')}
+                title={t('totalCustomers')}
+                comparativeText={t('sinceLastMonth')}
               />
             </Grid>
             <Grid xs={12} sm={6} lg={3}>
@@ -82,7 +82,7 @@ const Page = (props) => {
                   value: data.dayProgress,
                 })}
                 status={status}
-                title={t('dashboard.taskProgress')}
+                title={t('taskProgress')}
               />
             </Grid>
             <Grid xs={12} sm={6} lg={3}>
@@ -93,14 +93,14 @@ const Page = (props) => {
                   value: `$${data.totalProfit}k`,
                 })}
                 status={status}
-                title={t('dashboard.totalProfit')}
+                title={t('totalProfit')}
               />
             </Grid>
             <Grid xs={12} lg={8}>
               <OverviewSales
-                title={t('dashboard.sales')}
-                overviewText={t('dashboard.overview')}
-                sync={t('dashboard.sync')}
+                title={t('sales')}
+                overviewText={t('overview')}
+                sync={t('sync')}
                 status={status}
                 chartSeries={data?.sales || []}
                 sx={{ height: '100%' }}
@@ -109,7 +109,7 @@ const Page = (props) => {
             </Grid>
             <Grid xs={12} md={6} lg={4}>
               <OverviewTraffic
-                title={t('dashboard.trafficSource')}
+                title={t('trafficSource')}
                 status={status}
                 trafficSources={data?.trafficSources}
                 sx={{ height: '100%' }}
@@ -117,28 +117,28 @@ const Page = (props) => {
             </Grid>
             <Grid xs={12} md={6} lg={4}>
               <OverviewLatestProducts
-                title={t('dashboard.latestProducts')}
+                title={t('latestProducts')}
                 products={productsData}
                 status={productsStatus}
                 sx={{ height: '100%' }}
-                formatPrefix={t('dashboard.dateAgoPrefix')}
-                formatSuffix={t('dashboard.dateAgoSuffix')}
-                viewAll={t('dashboard.viewAll')}
+                formatPrefix={t('dateAgoPrefix')}
+                formatSuffix={t('dateAgoSuffix')}
+                viewAll={t('viewAll')}
               />
             </Grid>
             <Grid xs={12} md={12} lg={8}>
               <OverviewLatestOrders
                 headers={{
-                  order: t('dashboard.order'),
-                  customer: t('dashboard.customer'),
-                  date: t('dashboard.date'),
-                  status: t('dashboard.status'),
+                  order: t('order'),
+                  customer: t('customer'),
+                  date: t('date'),
+                  status: t('status'),
                 }}
-                title={t('dashboard.latestOrders')}
+                title={t('latestOrders')}
                 status={ordersStatus}
                 orders={ordersData}
                 sx={{ height: '100%' }}
-                viewAll={t('dashboard.viewAll')}
+                viewAll={t('viewAll')}
               />
             </Grid>
           </Grid>
