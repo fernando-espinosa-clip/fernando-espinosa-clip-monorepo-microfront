@@ -4,19 +4,11 @@ import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 import Bars3Icon from '@heroicons/react/24/solid/Bars3Icon';
 import MagnifyingGlassIcon from '@heroicons/react/24/solid/MagnifyingGlassIcon';
 import React from 'react';
-import {
-  Avatar,
-  Badge,
-  Box,
-  IconButton,
-  Stack,
-  SvgIcon,
-  Tooltip,
-  useMediaQuery
-} from '@mui/material';
+import { Avatar, Badge, Box, IconButton, Stack, SvgIcon, Tooltip, useMediaQuery } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { usePopover } from '../../hooks/use-popover';
 import { AccountPopover } from './account-popover';
+import { LanguageSwitch } from '../../components/LanguageSwitch';
 
 const SIDE_NAV_WIDTH = 280;
 const TOP_NAV_HEIGHT = 64;
@@ -35,13 +27,13 @@ export const TopNav = (props) => {
           backgroundColor: (theme) => alpha(theme.palette.background.default, 0.8),
           position: 'sticky',
           left: {
-            lg: `${SIDE_NAV_WIDTH}px`
+            lg: `${SIDE_NAV_WIDTH}px`,
           },
           top: 0,
           width: {
-            lg: `calc(100% - ${SIDE_NAV_WIDTH}px)`
+            lg: `calc(100% - ${SIDE_NAV_WIDTH}px)`,
           },
-          zIndex: (theme) => theme.zIndex.appBar
+          zIndex: (theme) => theme.zIndex.appBar,
         }}
       >
         <Stack
@@ -51,14 +43,10 @@ export const TopNav = (props) => {
           spacing={2}
           sx={{
             minHeight: TOP_NAV_HEIGHT,
-            px: 2
+            px: 2,
           }}
         >
-          <Stack
-            alignItems="center"
-            direction="row"
-            spacing={2}
-          >
+          <Stack alignItems="center" direction="row" spacing={2}>
             {!lgUp && (
               <IconButton onClick={onNavOpen}>
                 <SvgIcon fontSize="small">
@@ -74,11 +62,8 @@ export const TopNav = (props) => {
               </IconButton>
             </Tooltip>
           </Stack>
-          <Stack
-            alignItems="center"
-            direction="row"
-            spacing={2}
-          >
+          <Stack alignItems="center" direction="row" spacing={2}>
+            <LanguageSwitch />
             <Tooltip title="Contacts">
               <IconButton>
                 <SvgIcon fontSize="small">
@@ -88,11 +73,7 @@ export const TopNav = (props) => {
             </Tooltip>
             <Tooltip title="Notifications">
               <IconButton>
-                <Badge
-                  badgeContent={4}
-                  color="success"
-                  variant="dot"
-                >
+                <Badge badgeContent={4} color="success" variant="dot">
                   <SvgIcon fontSize="small">
                     <BellIcon />
                   </SvgIcon>
@@ -105,7 +86,7 @@ export const TopNav = (props) => {
               sx={{
                 cursor: 'pointer',
                 height: 40,
-                width: 40
+                width: 40,
               }}
               src="https://material-kit-react.devias.io/assets/avatars/avatar-anika-visser.png"
             />
@@ -122,5 +103,5 @@ export const TopNav = (props) => {
 };
 
 TopNav.propTypes = {
-  onNavOpen: PropTypes.func
+  onNavOpen: PropTypes.func,
 };

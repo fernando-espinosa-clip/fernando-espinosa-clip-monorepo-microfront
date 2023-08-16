@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import { makeStyles } from '@mui/styles';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { LanguageSwitch } from './LanguageSwitch';
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -72,11 +73,12 @@ export default function Header({ isSignedIn, onSignOut }) {
             App
           </Typography>
           <Box>
+            <LanguageSwitch />
             {isSignedIn && (
               <IconButton
                 onClick={() => history.push('/cpanel/dashboard')}
                 color={'secondary'}
-                sx={{ mr: 2 }}
+                sx={{ mx: 2 }}
                 aria-label="delete"
               >
                 <SettingsIcon />
