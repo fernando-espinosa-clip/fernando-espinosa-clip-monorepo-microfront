@@ -7,7 +7,7 @@ import { Chart } from '../../components/chart';
 import React from 'react';
 import SkeletonChart from '../../components/SkeletonChart';
 
-const useChartOptions = () => {
+const useChartOptions = (months) => {
   const theme = useTheme();
 
   return {
@@ -65,7 +65,7 @@ const useChartOptions = () => {
         color: theme.palette.divider,
         show: true,
       },
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      categories: months,
       labels: {
         offsetY: 5,
         style: {
@@ -86,8 +86,8 @@ const useChartOptions = () => {
 };
 
 export const OverviewSales = (props) => {
-  const { chartSeries, sx, status, title, overviewText, sync } = props;
-  const chartOptions = useChartOptions();
+  const { chartSeries, sx, status, title, overviewText, sync, months } = props;
+  const chartOptions = useChartOptions(months);
 
   return (
     <Card sx={sx}>

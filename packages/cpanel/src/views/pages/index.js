@@ -13,6 +13,16 @@ import useDashboard from '../../hooks/data/useDashboard';
 import useProducts from '../../hooks/data/useProducts';
 import useOrders from '../../hooks/data/useOrders';
 import { useTranslation } from 'react-i18next';
+import { getLocaleStr } from '../../translations/dateLocale';
+
+const getMonths = (lang = 'en') => {
+  switch (lang) {
+    case 'es':
+      return ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    default:
+      return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  }
+};
 
 const Page = (props) => {
   const { storage } = props;
@@ -20,7 +30,7 @@ const Page = (props) => {
   const { status, data } = useDashboard(storage, i18n.language);
   const { status: productsStatus, data: productsData } = useProducts(storage, i18n.language);
   const { status: ordersStatus, data: ordersData } = useOrders(storage);
-
+  const months = React.useMemo(() => getMonths(getLocaleStr(i18n.language)), [i18n.language]);
   return (
     <>
       <Box
@@ -94,6 +104,7 @@ const Page = (props) => {
                 status={status}
                 chartSeries={data?.sales || []}
                 sx={{ height: '100%' }}
+                months={months}
               />
             </Grid>
             <Grid xs={12} md={6} lg={4}>
