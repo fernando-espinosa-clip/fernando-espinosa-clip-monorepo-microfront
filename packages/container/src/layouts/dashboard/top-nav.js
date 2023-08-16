@@ -9,6 +9,7 @@ import { alpha } from '@mui/material/styles';
 import { usePopover } from '../../hooks/use-popover';
 import { AccountPopover } from './account-popover';
 import { LanguageSwitch } from '../../components/LanguageSwitch';
+import { useTranslation } from 'react-i18next';
 
 const SIDE_NAV_WIDTH = 280;
 const TOP_NAV_HEIGHT = 64;
@@ -17,6 +18,7 @@ export const TopNav = (props) => {
   const { onNavOpen } = props;
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
   const accountPopover = usePopover();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -54,7 +56,7 @@ export const TopNav = (props) => {
                 </SvgIcon>
               </IconButton>
             )}
-            <Tooltip title="Search">
+            <Tooltip title={t('sideNav.search')}>
               <IconButton>
                 <SvgIcon fontSize="small">
                   <MagnifyingGlassIcon />
@@ -64,14 +66,14 @@ export const TopNav = (props) => {
           </Stack>
           <Stack alignItems="center" direction="row" spacing={2}>
             <LanguageSwitch />
-            <Tooltip title="Contacts">
+            <Tooltip title={t('sideNav.contacts')}>
               <IconButton>
                 <SvgIcon fontSize="small">
                   <UsersIcon />
                 </SvgIcon>
               </IconButton>
             </Tooltip>
-            <Tooltip title="Notifications">
+            <Tooltip title={t('sideNav.notifications')}>
               <IconButton>
                 <Badge badgeContent={4} color="success" variant="dot">
                   <SvgIcon fontSize="small">

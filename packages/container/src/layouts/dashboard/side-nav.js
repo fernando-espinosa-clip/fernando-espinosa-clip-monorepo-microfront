@@ -7,11 +7,13 @@ import { Logo } from '../../components/logo';
 import { items } from './config';
 import { SideNavItem } from './side-nav-item';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const SideNav = (props) => {
   const { open, onClose } = props;
   const { pathname } = useLocation();
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
+  const { t } = useTranslation();
 
   const content = (
     <Box
@@ -48,10 +50,10 @@ export const SideNav = (props) => {
         >
           <div>
             <Typography color="inherit" variant="subtitle1">
-              Clip Dashboard
+              {t('sideNav.title')}
             </Typography>
             <Typography color="neutral.400" variant="body2">
-              Production
+              {t('sideNav.environment')}
             </Typography>
           </div>
           <SvgIcon fontSize="small" sx={{ color: 'neutral.500' }}>
@@ -88,7 +90,7 @@ export const SideNav = (props) => {
                 icon={item.icon}
                 key={item.title}
                 path={item.path}
-                title={item.title}
+                title={t(`sideNav.${item.title.toLocaleLowerCase()}`)}
               />
             );
           })}
@@ -102,10 +104,10 @@ export const SideNav = (props) => {
         }}
       >
         <Typography color="neutral.100" variant="subtitle2">
-          Need More?
+          {t('sideNav.needMore')}
         </Typography>
         <Typography color="neutral.500" variant="body2">
-          Check out our corporate website.
+          {t('sideNav.checkout')}
         </Typography>
         <Box
           sx={{
@@ -133,7 +135,7 @@ export const SideNav = (props) => {
           target="_blank"
           variant="contained"
         >
-          Open Clip.mx
+          {t('sideNav.open')} Clip.mx
         </Button>
       </Box>
     </Box>

@@ -15,10 +15,10 @@ export const items = [
     title: 'Shop',
     path: '/',
     icon: (
-        <SvgIcon fontSize="small">
-          <ShoppingCartIcon />
-        </SvgIcon>
-    )
+      <SvgIcon fontSize="small">
+        <ShoppingCartIcon />
+      </SvgIcon>
+    ),
   },
   {
     title: 'Dashboard',
@@ -27,7 +27,7 @@ export const items = [
       <SvgIcon fontSize="small">
         <ChartBarIcon />
       </SvgIcon>
-    )
+    ),
   },
   {
     title: 'Customers',
@@ -36,7 +36,7 @@ export const items = [
       <SvgIcon fontSize="small">
         <UsersIcon />
       </SvgIcon>
-    )
+    ),
   },
   {
     title: 'Companies',
@@ -45,7 +45,7 @@ export const items = [
       <SvgIcon fontSize="small">
         <ShoppingBagIcon />
       </SvgIcon>
-    )
+    ),
   },
   {
     title: 'Account',
@@ -54,7 +54,7 @@ export const items = [
       <SvgIcon fontSize="small">
         <UserIcon />
       </SvgIcon>
-    )
+    ),
   },
   {
     title: 'Settings',
@@ -63,7 +63,7 @@ export const items = [
       <SvgIcon fontSize="small">
         <CogIcon />
       </SvgIcon>
-    )
+    ),
   },
   {
     title: 'Login',
@@ -72,7 +72,7 @@ export const items = [
       <SvgIcon fontSize="small">
         <LockClosedIcon />
       </SvgIcon>
-    )
+    ),
   },
   {
     title: 'Register',
@@ -81,7 +81,7 @@ export const items = [
       <SvgIcon fontSize="small">
         <UserPlusIcon />
       </SvgIcon>
-    )
+    ),
   },
   {
     title: 'Error',
@@ -90,6 +90,6 @@ export const items = [
       <SvgIcon fontSize="small">
         <XCircleIcon />
       </SvgIcon>
-    )
-  }
+    ),
+  },
 ];

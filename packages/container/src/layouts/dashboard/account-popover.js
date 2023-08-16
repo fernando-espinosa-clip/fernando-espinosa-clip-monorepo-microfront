@@ -2,25 +2,24 @@ import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Box, Divider, MenuItem, MenuList, Popover, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 export const AccountPopover = (props) => {
   const { anchorEl, onClose, open } = props;
   const history = useHistory();
+  const { t } = useTranslation();
 
-  const handleSignOut = useCallback(
-    () => {
-      onClose?.();
-        history.push('/auth/signout');
-    },
-    [onClose, history]
-  );
+  const handleSignOut = useCallback(() => {
+    onClose?.();
+    history.push('/auth/signout');
+  }, [onClose, history]);
 
   return (
     <Popover
       anchorEl={anchorEl}
       anchorOrigin={{
         horizontal: 'left',
-        vertical: 'bottom'
+        vertical: 'bottom',
       }}
       onClose={onClose}
       open={open}
@@ -29,16 +28,11 @@ export const AccountPopover = (props) => {
       <Box
         sx={{
           py: 1.5,
-          px: 2
+          px: 2,
         }}
       >
-        <Typography variant="overline">
-          Account
-        </Typography>
-        <Typography
-          color="text.secondary"
-          variant="body2"
-        >
+        <Typography variant="overline">{t('sideNav.account')}</Typography>
+        <Typography color="text.secondary" variant="body2">
           Anika Visser
         </Typography>
       </Box>
@@ -49,13 +43,11 @@ export const AccountPopover = (props) => {
         sx={{
           p: '8px',
           '& > *': {
-            borderRadius: 1
-          }
+            borderRadius: 1,
+          },
         }}
       >
-        <MenuItem onClick={handleSignOut}>
-          Sign out
-        </MenuItem>
+        <MenuItem onClick={handleSignOut}>{t('sideNav.signOut')}</MenuItem>
       </MenuList>
     </Popover>
   );
@@ -64,5 +56,5 @@ export const AccountPopover = (props) => {
 AccountPopover.propTypes = {
   anchorEl: PropTypes.any,
   onClose: PropTypes.func,
-  open: PropTypes.bool.isRequired
+  open: PropTypes.bool.isRequired,
 };
