@@ -35,28 +35,30 @@ const Routes = () => {
   }, [isSignedIn]);
 
   return (
-    <Suspense fallback={<Progress />}>
-      <Switch>
-        <Route path="/auth">
+    <Switch>
+      <Route path="/auth">
+        <Suspense fallback={<Progress />}>
           <AuthLazy onSignIn={() => setIsSignedIn(true)} onSignOut={() => setIsSignedIn(false)} />
-        </Route>
-        <Route path="/cpanel">
-          {!isSignedIn && <Redirect to="/shop" />}
-          <Layout>
+        </Suspense>
+      </Route>
+      <Route path="/cpanel">
+        {!isSignedIn && <Redirect to="/shop" />}
+        <Layout>
+          <Suspense fallback={<Progress />}>
             <CpanelLazy />
-          </Layout>
-        </Route>
-        <Route path="/shop">
-          <>
-            <Header onSignOut={() => setIsSignedIn(false)} isSignedIn={isSignedIn} />
-            <MarketingLazy />
-          </>
-        </Route>
-        <Route path="/">
-          <Redirect to="/shop" />
-        </Route>
-      </Switch>
-    </Suspense>
+          </Suspense>
+        </Layout>
+      </Route>
+      <Route path="/shop">
+        <Suspense fallback={<Progress />}>
+          <Header onSignOut={() => setIsSignedIn(false)} isSignedIn={isSignedIn} />
+          <MarketingLazy />
+        </Suspense>
+      </Route>
+      <Route path="/">
+        <Redirect to="/shop" />
+      </Route>
+    </Switch>
   );
 };
 
