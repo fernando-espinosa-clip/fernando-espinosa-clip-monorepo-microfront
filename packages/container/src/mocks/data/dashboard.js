@@ -1,6 +1,6 @@
 import { getRandomArbitrary } from '../../utils/generatorUtilities';
 
-export const mainData = {
+export const mainData = () => ({
   budget: {
     amount: `${getRandomArbitrary(2400, 35000) / 100} k`,
     comparative: getRandomArbitrary(-50, 50),
@@ -26,4 +26,4 @@ export const mainData = {
     { source: 'tablet', amount: 15 },
     { source: 'phone', amount: 22 },
   ],
-};
+});

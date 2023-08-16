@@ -3,7 +3,7 @@ import { products } from './products';
 import subMinutes from 'date-fns/subMinutes';
 import { getRandomArbitrary, createArray, uuidv4 } from '../../utils/generatorUtilities';
 
-export const orders = [
+export const orders = () => [
   {
     id: '11437380-4483-4028-a4ae-2332ba361029',
     ref: 'DEV1099',

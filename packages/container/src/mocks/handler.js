@@ -4,7 +4,7 @@ import { users } from './data/users';
 import { mainData } from './data/dashboard';
 import { products } from './data/products';
 import { orders } from './data/orders';
-import { customers1 as customers } from './data/customers';
+import { customers1 as customers, customers1 } from './data/customers';
 import { getRandomArbitrary, cloneObj } from '../utils/generatorUtilities';
 
 const sortProductsByUpdatedAt = (a, b) => {
@@ -40,25 +40,26 @@ export const handlers = [
     );
   }),
   rest.get('/api/dashboard', async (req, res, ctx) => {
-    const response = await waitFor(mainData, getRandomArbitrary(1000, 2500));
+    const response = await waitFor(mainData(), getRandomArbitrary(1000, 2500));
     return res(ctx.json(response));
   }),
   rest.get('/api/products/latest', async (req, res, ctx) => {
-    products.sort(sortProductsByUpdatedAt);
-    const result = products.slice(0, 5);
+    const ordered = products().sort(sortProductsByUpdatedAt);
+    const result = ordered.slice(0, 5);
     const response = await waitFor(result, getRandomArbitrary(500, 3000));
     return res(ctx.json(response));
   }),
   rest.get('/api/orders/latest', async (req, res, ctx) => {
-    const filteredOrders = cloneObj(orders.slice(0, 7));
+    const filteredOrders = cloneObj(orders().slice(0, 7));
+    const customers = customers1();
     filteredOrders.forEach((o) => {
       o.customer = customers.find((c) => c.id === o.customer);
     });
-    console.log('se crearon ordenes');
     const response = await waitFor(filteredOrders, getRandomArbitrary(700, 2500));
     return res(ctx.json(response));
   }),
   rest.get('/api/customers', async (req, res, ctx) => {
+    const customers = customers1();
     const response = await waitFor(customers, getRandomArbitrary(500, 2000));
     return res(ctx.json(response));
   }),

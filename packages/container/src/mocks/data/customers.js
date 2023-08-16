@@ -1,4 +1,4 @@
-export const customers1 = [
+export const customers1 = () => [
   {
     first_name: 'Joseph',
     last_name: 'Rice',
@@ -341,7 +341,7 @@ export const customers1 = [
   },
 ];
 
-export const customers2 = [
+export const customers2 = () => [
   {
     first_name: 'Cody',
     last_name: 'Lyons',
@@ -664,7 +664,7 @@ export const customers2 = [
   },
 ];
 
-export const customers3 = [
+export const customers3 = () => [
   {
     first_name: 'Gary',
     last_name: 'Jones',
