@@ -12,6 +12,7 @@ import storage from './utils/storage';
 const MarketingLazy = lazy(() => import('./components/MarketingApp'));
 const AuthLazy = lazy(() => import('./components/AuthApp'));
 const CpanelLazy = lazy(() => import('./components/CpanelApp'));
+const MessageCenterLazy = lazy(() => import('./components/MessageCenter'));
 
 import theme from './themes';
 
@@ -49,10 +50,19 @@ const Routes = () => {
           </Suspense>
         </Layout>
       </Route>
+      <Route path="/notifications">
+        {!isSignedIn && <Redirect to="/shop" />}
+        <Layout>
+          <Suspense fallback={<Progress />}>
+            <MessageCenterLazy />
+          </Suspense>
+        </Layout>
+      </Route>
+
       <Route path="/shop">
         <Suspense fallback={<Progress />}>
           <Header onSignOut={() => setIsSignedIn(false)} isSignedIn={isSignedIn} />
-          <MarketingLazy />
+          <MarketingLazy algo="mas" />
         </Suspense>
       </Route>
       <Route path="/">
